@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mayclass/src/config/utils/constant/color.dart';
 import 'package:mayclass/src/config/utils/styles/text.dart';
 import 'package:mayclass/src/config/utils/styles/textfield.dart';
+import 'package:mayclass/src/features/presentation/secondary_screen/home_screen/home_screen.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
@@ -37,7 +38,11 @@ class RegisterScreen extends StatelessWidget {
               ),
               MaterialButton(
                 color: appbarcolor,
-                  onPressed: (){},
+                  onPressed: (){
+                  // Get.push();
+                    Navigator.push(context, MaterialPageRoute(builder: (context) =>  Homepage()),
+                    );
+                  },
                 child: Text("Register"),
               )
             ],

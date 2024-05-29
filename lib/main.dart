@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
-
-import 'src/config/utils/constant/color.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'src/features/presentation/primary_screen/register_screen/screen/register_screen.dart';
 
+
 void main() {
-  runApp(const MyApp());
+  runApp(
+      ProviderScope(
+          child: MyApp()),
+  );
+
 }
 
 class MyApp extends StatelessWidget {
