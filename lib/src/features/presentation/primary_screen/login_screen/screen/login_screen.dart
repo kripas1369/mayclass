@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:mayclass/src/config/utils/constant/color.dart';
 import 'package:mayclass/src/config/utils/styles/text.dart';
 import 'package:mayclass/src/config/utils/styles/textfield.dart';
+import 'package:mayclass/src/core/network/login_service/login_service.dart';
 import 'package:mayclass/src/core/network/register_service/register_service.dart';
-import 'package:mayclass/src/features/presentation/primary_screen/login_screen/screen/login_screen.dart';
 import 'package:mayclass/src/features/presentation/secondary_screen/home_screen/home_screen.dart';
 
-class RegisterScreen extends StatelessWidget {
-  RegisterScreen({super.key});
+class LoginScreen extends StatelessWidget {
+  LoginScreen({super.key});
 
   final _formKey = GlobalKey<FormState>();
   // final TextEditingController _fullnameController = TextEditingController();
@@ -30,7 +30,7 @@ class RegisterScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomHeading(text: 'Our new app',),
-                CustomSubHeading(text: 'REGISTER',),
+                CustomSubHeading(text: 'Login',),
                 SizedBox(height: 30),
                 Text("Fullname"),
                 TextFormField(
@@ -61,29 +61,21 @@ class RegisterScreen extends StatelessWidget {
                   },
                 ),
                 SizedBox(height: 30),
-                Row(
-                  children: [
-                    MaterialButton(
-                      color: appbarcolor,
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          RegisterService().registerEmp(
-                              mobile: _mobilenumberController.text,
-                              password: _passwordController.text,
-                              context: context
-                          );
-                        }
-                      },
-                      child: Text("Register"),
-                    ),
-                    MaterialButton(onPressed: (){
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => LoginScreen()
-                          )
-                      );
-                    },child: Text("login"),)
-                  ],
+                MaterialButton(
+                  color: appbarcolor,
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      // RegisterService().registerEmp(
+                      //     mobile: _mobilenumberController.text,
+                      //     password: _passwordController.text,
+                      //     context: context
+                      // );
+                      LoginService().loginUser(
+                          mobile: _mobilenumberController.text,
+                          password: _passwordController.text,
+                          context: context);}
+                  },
+                  child: Text("Login"),
                 ),
               ],
             ),
