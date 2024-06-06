@@ -29,13 +29,12 @@ class RegisterService {
         Navigator.push(
         context,
           MaterialPageRoute(builder: (context) => Homepage(
-           fullname: mobile,
-            password: '',
+
           )
             )
             );
         SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-        sharedPreferences.setString("fullname", mobile);
+        sharedPreferences.setString("mobilenumber", mobile);
 
         print("****************");
         print("****************");

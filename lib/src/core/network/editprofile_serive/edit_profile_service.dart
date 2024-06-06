@@ -5,39 +5,40 @@ import 'package:http/http.dart'as http;
 import 'package:mayclass/src/config/utils/constant/api_constant.dart';
 import 'package:mayclass/src/features/presentation/secondary_screen/home_screen/home_screen.dart';
 
-class LoginService {
-  Future<void> loginUser({
+class EditProfileService {
+  Future<void> editProfile({
     required String mobile,
-    required String password,
     required context,
   })async{
 
     Map<String,dynamic> body ={
-      "username":mobile,
-      "password":password,
-      "login_type":"mobile",
+      "mobile_number":mobile,
+      "email":"kripas@gmail.com"
     };
 
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String accessToken = pref.getString("access_token")??"";
 
-    final response = await http.post(
-        Uri.parse(ApiUrls.loginurl),
-        headers: {"Content-Type":"application/json"},
+    final response = await http.patch(
+        Uri.parse(ApiUrls.editprofile),
+        headers: {
+          "Content-Type":"application/json",
+          "Authorization":"Bearer $accessToken"
+
+        },
         body:json.encode(body)
     );
 
     if(response.statusCode==200){
-      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-      sharedPreferences.setString("mobilenumber", mobile);
-      sharedPreferences.setString("password", password);
-
-      sharedPreferences.setString("access_token", jsonDecode(response.body)["access"]);
-
       Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Homepage()
+          MaterialPageRoute(builder: (context) => Homepage(
+
+          )
           )
       );
-      print(response.body);
+      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+      sharedPreferences.setString("mobilenumber", mobile);
 
       print("****************");
       print("****************");
@@ -45,7 +46,7 @@ class LoginService {
       print("****************");
     }else{
       final snackBar = SnackBar(
-        content:  Text('${response.body}'),
+        content:  Text('some error'),
         action: SnackBarAction(
           label: 'Undo',
           onPressed: () {

@@ -12,8 +12,8 @@ class LoginScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   // final TextEditingController _fullnameController = TextEditingController();
   // final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _mobilenumberController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _mobilenumberController = TextEditingController(text: "9860486269");
+  final TextEditingController _passwordController = TextEditingController(text: "Admin1234");
   @override
   Widget build(BuildContext context) {
     return Scaffold(
